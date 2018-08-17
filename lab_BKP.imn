@@ -1,0 +1,318 @@
+node n1 {
+    type router
+    model router
+    network-config {
+	hostname C
+	!
+	interface eth2
+	 ip address 10.20.18.65/26
+	 ipv6 address 2001:db8:2018:C::2/64
+	!
+	interface eth1
+	 ipv6 address 2001:db8:2018:CD::2/126
+	 ip address 10.20.18.237/30
+	!
+	interface eth0
+	 ipv6 address 2001:db8:2018:AC::3/126
+	 ip address 10.20.18.230/30
+	!
+    }
+    canvas c1
+    iconcoords {757.1365863805704 140.9370908823887}
+    labelcoords {755.1365863805704 170.93709088238887}
+    interface-peer {eth0 n4}
+    interface-peer {eth1 n2}
+    services {zebra OSPFv2 OSPFv3 vtysh IPForward radvd}
+    interface-peer {eth2 n7}
+}
+
+node n2 {
+    type router
+    model router
+    network-config {
+	hostname D
+	!
+	interface eth2
+	 ip address 10.20.18.2/26
+	 ipv6 address 2001:db8:2018:D::2/64
+	!
+	interface eth0
+	 ipv6 address 2001:db8:2018:CD::3/126
+	 ip address 10.20.18.238/30
+	!
+	interface eth1
+	 ipv6 address 2001:db8:2018:BD::2/126
+	 ip address 10.20.18.234/30
+	!
+    }
+    canvas c1
+    iconcoords {960.2608495415531 410.42408456649275}
+    labelcoords {960.2608495415531 442.42408456649275}
+    interface-peer {eth0 n1}
+    interface-peer {eth1 n3}
+    services {zebra OSPFv2 OSPFv3 vtysh IPForward radvd}
+    interface-peer {eth2 n8}
+}
+
+node n3 {
+    type router
+    model router
+    network-config {
+	hostname B
+	!
+	interface eth2
+	 ip address 10.20.18.129/27
+	 ipv6 address 2001:db8:2018:B::2/64
+	!
+	interface eth0
+	 ipv6 address 2001:db8:2018:BD::3/126
+	 ip address 10.20.18.233/30
+	!
+	interface eth1
+	 ipv6 address 2001:db8:2018:AB::3/126
+	 ip address 10.20.18.226/30
+	!
+    }
+    canvas c1
+    iconcoords {748.2634023438617 645.9570512884309}
+    labelcoords {748.2634023438617 677.9570512884312}
+    interface-peer {eth0 n2}
+    interface-peer {eth1 n4}
+    services {zebra OSPFv2 OSPFv3 vtysh IPForward radvd}
+    interface-peer {eth2 n9}
+}
+
+node n4 {
+    type router
+    model router
+    network-config {
+	hostname A
+	!
+	interface eth2
+	 ip address 10.20.18.161/27
+	 ipv6 address 2001:db8:2018:A2::2/64
+	!
+	interface eth0
+	 ipv6 address 2001:db8:2018:AC::2/126
+	 ip address 10.20.18.229/30
+	!
+	interface eth1
+	 ipv6 address 2001:db8:2018:AB::2/126
+	 ip address 10.20.18.225/30
+	!
+    }
+    canvas c1
+    iconcoords {493.0842142164282 391.8688100243117}
+    labelcoords {493.0842142164282 423.8688100243117}
+    interface-peer {eth0 n1}
+    interface-peer {eth1 n3}
+    services {zebra OSPFv2 OSPFv3 vtysh IPForward DHCP radvd}
+    interface-peer {eth2 n10}
+    custom-config {
+	custom-config-id service:DHCP
+	custom-command DHCP
+	config {
+	dirs=('/etc/dhcp', '/var/lib/dhcp', )
+	cmdup=('touch /var/lib/dhcp/dhcpd.leases', 'chown -R dhcpd.dhcpd /var/lib/dhcp', 'dhcpd', )
+	}
+    }
+}
+
+node n5 {
+    type router
+    model host
+    network-config {
+	hostname n5
+	!
+	interface eth0
+	!
+    }
+    canvas c1
+    iconcoords {207.0 209.33333333333334}
+    labelcoords {207.0 241.33333333333334}
+    interface-peer {eth0 n10}
+    services {DefaultRoute SSH DHCPClient}
+}
+
+node n6 {
+    type router
+    model host
+    network-config {
+	hostname n6
+	!
+	interface eth0
+	!
+    }
+    canvas c1
+    iconcoords {199.0 538.0}
+    labelcoords {199.0 570.0}
+    interface-peer {eth0 n10}
+    services {DefaultRoute SSH DHCPClient}
+}
+
+node n7 {
+    type router
+    model host
+    network-config {
+	hostname n7
+	!
+	interface eth0
+	 ip address 10.20.18.66/26
+	 ipv6 address 2001:db8:2018:C::3/64
+	!
+    }
+    canvas c1
+    iconcoords {1114.0 37.0}
+    labelcoords {1114.0 69.0}
+    interface-peer {eth0 n1}
+}
+
+node n8 {
+    type router
+    model host
+    network-config {
+	hostname n8
+	!
+	interface eth0
+	 ip address 10.20.18.3/26
+	 ipv6 address 2001:db8:2018:D::3/64
+	!
+    }
+    canvas c1
+    iconcoords {1272.0 438.0}
+    labelcoords {1272.0 470.0}
+    interface-peer {eth0 n2}
+}
+
+node n9 {
+    type router
+    model host
+    network-config {
+	hostname n9
+	!
+	interface eth0
+	 ip address 10.20.18.130/27
+	 ipv6 address 2001:db8:2018:B::3/64
+	!
+    }
+    canvas c1
+    iconcoords {645.0 873.6666666666666}
+    labelcoords {645.0 905.6666666666666}
+    interface-peer {eth0 n3}
+}
+
+node n10 {
+    type lanswitch
+    network-config {
+	hostname n10
+	!
+    }
+    canvas c1
+    iconcoords {308.0 378.6666666666667}
+    labelcoords {308.0 402.6666666666667}
+    interface-peer {e0 n5}
+    interface-peer {e1 n6}
+    interface-peer {e2 n4}
+}
+
+link l1 {
+    nodes {n4 n1}
+    bandwidth 0
+}
+
+link l2 {
+    nodes {n1 n2}
+    bandwidth 0
+}
+
+link l3 {
+    nodes {n2 n3}
+    bandwidth 0
+}
+
+link l4 {
+    nodes {n3 n4}
+    bandwidth 0
+}
+
+link l5 {
+    nodes {n5 n10}
+    bandwidth 0
+}
+
+link l6 {
+    nodes {n6 n10}
+    bandwidth 0
+}
+
+link l7 {
+    nodes {n10 n4}
+    bandwidth 0
+}
+
+link l8 {
+    nodes {n1 n7}
+    bandwidth 0
+}
+
+link l9 {
+    nodes {n2 n8}
+    bandwidth 0
+}
+
+link l10 {
+    nodes {n3 n9}
+    bandwidth 0
+}
+
+annotation a2 {
+    type text
+    iconcoords {536.0 70.0}
+    label {}
+    canvas c1
+}
+
+annotation a3 {
+    type text
+    iconcoords {561.0 76.0}
+    label {}
+    canvas c1
+}
+
+annotation a4 {
+    type text
+    iconcoords {492.0 84.0}
+    label {}
+    canvas c1
+}
+
+annotation a5 {
+    type text
+    iconcoords {730.0 81.0}
+    label {}
+    canvas c1
+}
+
+canvas c1 {
+    name {Canvas1}
+    refpt {0 0 47.5791667 -122.132322 2.0}
+    scale {150.0}
+    size {1500 1000}
+}
+
+option global {
+    interface_names no
+    ip_addresses yes
+    ipv6_addresses yes
+    node_labels yes
+    link_labels yes
+    show_api no
+    background_images no
+    annotations yes
+    grid yes
+    traffic_start 0
+}
+
+option session {
+}
+
